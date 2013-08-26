@@ -139,10 +139,24 @@ teams.get(i).setTeamPtsDifferential(ts.getTeamPtsDifferential());
 }
 
 private void addHammerStats() {
-for (int i = 0; i < teams.size(); i++) {
-TeamStatistics ts = new TeamStatistics(teams.get(i));
-teams.get(i).setHammerNetPts(ts.getHammerNetPts());
+	addHammerDifferential();
+	addPointsBreakdownHammer();
 }
+/**
+ * Goes through every team one by one and adds their net hammer points
+ */
+private void addHammerDifferential() {
+	for (int i = 0; i < teams.size(); i++) {
+		TeamStatistics ts = new TeamStatistics(teams.get(i));
+		teams.get(i).setHammerNetPts(ts.getHammerNetPts());
+		}
+}
+
+private void addPointsBreakdownHammer() {
+	for (int i = 0; i < teams.size(); i++) {
+		TeamStatistics ts = new TeamStatistics(teams.get(i));
+		teams.get(i).setHammerBreakdown1Pt(ts.getHammerBreakdown1Pt());
+	}
 }
 
 }

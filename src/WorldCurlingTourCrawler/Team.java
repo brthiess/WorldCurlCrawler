@@ -9,6 +9,7 @@ int wins;
 int losses;
 double ptsDifferential;
 double hammerNetPts;
+double hammerBreakdownSteal2Pt, hammerBreakdownSteal1Pt, hammerBreakdown0Pt, hammerBreakdown1Pt, hammerBreakdown2pt, hammerBreakdown3pt;
 ArrayList<Game> games;
 TeamStatistics teamStats;
 
@@ -70,5 +71,9 @@ this.hammerNetPts = hammerNetPts;
 
 public double getHammerNetPts() {
 return this.hammerNetPts;
+}
+
+public void setHammerBreakdown1Pt(double percentage) {
+	this.hammerBreakdown1Pt = percentage;
 }
 }
