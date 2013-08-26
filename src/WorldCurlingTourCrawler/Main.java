@@ -1,5 +1,5 @@
 package WorldCurlingTourCrawler;
-
+//Github is fucking painful
 import java.io.BufferedReader;
 import java.util.ArrayList;
 
