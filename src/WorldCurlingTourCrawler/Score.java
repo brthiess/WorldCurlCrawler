@@ -2,13 +2,14 @@ package WorldCurlingTourCrawler;
 
 public class Score {
 
-int[][] scoreboard; //First dimension represents end. Second dimension represents which team. (0 or 1)
 
-public Score(int[][] scoreboard) {
-this.scoreboard = scoreboard;
-}
+int[][] scoreboard;
+int numberOfEnds;
+
 
 public Score() {
+	this.scoreboard = new int[11][2];
+	this.numberOfEnds = 0;
 }
 
 public String getHomeScoreInString() {
@@ -27,8 +28,12 @@ s = s.concat(" " + Integer.toString(scoreboard[i][1]));
 return s;
 }
 
-public int numberOfEnds() {
-return this.getLength();
+public int getNumberOfEnds() {
+return this.numberOfEnds;
+}
+
+public void setNumberOfEnds(int numberOfEnds) {
+	this.numberOfEnds = numberOfEnds;
 }
 
 public void addScore(int endNumber, int numberOfPoints, int teamNumber) {

@@ -16,7 +16,7 @@ public double getTeamPtsDifferential() {
 double netPoints = 0;
 double numberOfEnds = 0;
 for (int i = 0; i < games.size(); i++) {	
-for (int j = 0; j < games.get(i).getScore().numberOfEnds(); j++) {
+for (int j = 0; j < games.get(i).getScore().getNumberOfEnds(); j++) {
 netPoints += getNetPts(j, games.get(i));
 numberOfEnds++;
 }
@@ -31,7 +31,7 @@ double numberOfEnds = 0;
 boolean hasHammer = false;
 
 for (int i = 0; i < games.size(); i++) {
-for (int j = 0; j < games.get(i).getScore().numberOfEnds(); j++) {
+for (int j = 0; j < games.get(i).getScore().getNumberOfEnds(); j++) {
 if (hasHammer(j,games.get(i))) {
 netPoints += getNetPts(j, games.get(i));
 numberOfEnds++;
