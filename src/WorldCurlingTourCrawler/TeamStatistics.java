@@ -78,11 +78,75 @@ public class TeamStatistics {
 		return teamIsHomeTeam;
 	}
 	
-	public double getHammerBreakdown1Pt() {
-		double numberOfEndsWithHammer = numberOfEndsWithHammer();
+	/**
+	 * 
+	 * @return Returns the % of times the team got "X" points with hammer
+	 */
+	public double getHammerBreakdown(int X) {
+		double numberOfEndsWithHammer = 0;
+		double totalEnds = 0;
+		for (int i = 0; i < games.size(); i++) {
+			numberOfEndsWithHammer += numberOfEndsWithHammer(games.get(i));
+			totalEnds += numberOfTimesTeamGetsXPtsWithHammer(X, games.get(i));
+		}
+		return (totalEnds/numberOfEndsWithHammer);
 	}
 	
-	private double numberOfEndsWithHammer() {
-		
+	public double getNotHammerBreakdown(int X) {
+		double numberOfEndsWithoutHammer = 0;
+		double totalEnds = 0;
+		for (int i = 0; i < games.size(); i++) {
+			numberOfEndsWithoutHammer += numberOfEndsWithoutHammer(games.get(i));
+			totalEnds += numberOfTimesTeamGetsXPtsWithoutHammer(X, games.get(i));
+		}
+		return (totalEnds/numberOfEndsWithoutHammer);
+	}
+	public double numberOfTimesTeamGetsXPtsWithHammer(int X, Game g) {
+		double numberOfTimesTeamGetsXPtsWithHammer = 0;
+		for (int i = 0; i < g.getScore().getNumberOfEnds(); i++) {
+			if (hasHammer(i, g)) {
+				if (getNetPts(i,g) == X) {
+					numberOfTimesTeamGetsXPtsWithHammer++;
+				}
+			}
+		}
+		return numberOfTimesTeamGetsXPtsWithHammer;
+	}
+	
+	public double numberOfTimesTeamGetsXPtsWithoutHammer(int X, Game g) {
+		double numberOfTimesTeamGetsXPtsWithoutHammer = 0;
+		for (int i = 0; i < g.getScore().getNumberOfEnds(); i++) {
+			if (!hasHammer(i, g)) {
+				if (getNetPts(i, g) == X) {
+					numberOfTimesTeamGetsXPtsWithoutHammer++;
+				}
+			}
+		}
+		return numberOfTimesTeamGetsXPtsWithoutHammer;
+	}
+	
+	/**
+	 * 
+	 * @param g 
+	 * @return Returns number of ends the team has with hammer for a specified game 'g'
+	 */
+	private double numberOfEndsWithHammer(Game g) {
+		double numberOfEndsWithHammer = 0;
+		for (int i = 0; i < g.getScore().getNumberOfEnds(); i++) {
+			if (hasHammer(i, g)) {
+				numberOfEndsWithHammer++;
+			}
+		}
+		return numberOfEndsWithHammer;
+	}
+	
+	private double numberOfEndsWithoutHammer(Game g) {
+		double numberOfEndsWithoutHammer = 0;
+		for (int i = 0; i < g.getScore().getNumberOfEnds(); i++) {
+			if (!hasHammer(i, g)) {
+				numberOfEndsWithoutHammer++;
+			}
+		}
+		return numberOfEndsWithoutHammer;
 	}
 }

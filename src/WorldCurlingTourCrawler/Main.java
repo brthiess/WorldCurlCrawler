@@ -26,7 +26,7 @@ Statistics s = new Statistics(games);
 ArrayList<Team> teams = s.UpdateStatistics();
 
 for (int i = 0; i < teams.size(); i++) {
-System.out.println(teams.get(i).getNameString() + " W:" + teams.get(i).getWins() + " L:" + teams.get(i).getLosses() + " Pts Differential:" + teams.get(i).getTeamPtsDifferential() + " Hammer Differential:" + teams.get(i).getHammerNetPts());
+System.out.println(teams.get(i).getNameString() + "\tW:" + teams.get(i).getWins() + "\tL:" + teams.get(i).getLosses() + "\tPts Differential:" + teams.get(i).getTeamPtsDifferential() + "\tHammer Differential:" + teams.get(i).getHammerNetPts() + "\t1 pt % with Hammer:" + teams.get(i).getHammerBreakdown(1) + "\t2 pt % with Hammer:" + teams.get(i).getHammerBreakdown(2));
 }
 
 

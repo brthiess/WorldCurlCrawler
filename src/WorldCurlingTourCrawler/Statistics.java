@@ -155,7 +155,18 @@ private void addHammerDifferential() {
 private void addPointsBreakdownHammer() {
 	for (int i = 0; i < teams.size(); i++) {
 		TeamStatistics ts = new TeamStatistics(teams.get(i));
-		teams.get(i).setHammerBreakdown1Pt(ts.getHammerBreakdown1Pt());
+		for (int j = -2; j < 4; j++) {
+		teams.get(i).setHammerBreakdown(j, ts.getHammerBreakdown(j));
+		}
+	}
+}
+
+private void addPointsBreakdownNotHammer() {
+	for (int i = 0; i < teams.size(); i++) {
+		TeamStatistics ts = new TeamStatistics(teams.get(i));
+		for (int j = -3; j < 3; j++) {
+			teams.get(i).setNotHammerBreakdown(j, ts.getNotHammerBreakdown(j));
+		}
 	}
 }
 
