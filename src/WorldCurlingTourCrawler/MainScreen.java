@@ -17,8 +17,8 @@ public class MainScreen extends Applet implements ActionListener  {
 
    int width, height;
    ArrayList<Team> teams;
-   Button downloadButton;
-   boolean crawlHasFinished, crawlIsInProgress, teamHasBeenClickedOn;
+   Button downloadButton, showTeamStats;
+   boolean crawlHasFinished, crawlIsInProgress, teamHasBeenClickedOn, showTeamStatsClicked;
    Choice choice;
    int teamWins = 0;
 
@@ -39,26 +39,44 @@ public class MainScreen extends Applet implements ActionListener  {
       downloadButton = new Button("Download");
       add(downloadButton);
       downloadButton.addActionListener(this); 
+      
       crawlHasFinished = false;
       teamHasBeenClickedOn = false;
+      showTeamStatsClicked = false;
+      
+      //ShowTeamStats Button
+      showTeamStats = new Button("Show Team Stats");
+      add(showTeamStats);
+      showTeamStats.addActionListener(this);      
    }
    
 
    public void paint( Graphics g ) {
+	   
+	   //Displays the stats of the team that
+	   //has been clicked on from the drop 
+	   //down list
 	   if (teamHasBeenClickedOn) {
 		   g.setColor(Color.white);
 		   g.drawString("" + teamWins, 50, 300);
 	   }
-	   if (crawlHasFinished) {
+	   
+	   //If the crawl has finished or the file has been loaded
+	   //from the local disk, then
+	   //this method gets activated.  It adds
+	   //all of the teams to a drop down list
+	   if (crawlHasFinished || showTeamStatsClicked) {
 	      g.setColor(Color.white);
 	      String data = "";
 	      	for (int i = 0; i < teams.size(); i++) {
 	      		choice.add(teams.get(i).getNameString());
 	      			//data += teams.get(i).getNameString() + "\tW:" + teams.get(i).getWins() + "\tL:" + teams.get(i).getLosses() + "\tPts Differential:" + teams.get(i).getTeamPtsDifferential() + "\tHammer Differential:" + teams.get(i).getHammerNetPts() + "\t1 pt % with Hammer:" + teams.get(i).getHammerBreakdown(1) + "\t2 pt % with Hammer:" + teams.get(i).getHammerBreakdown(2) + "\n";
 	      	}
-	      	add(choice);
-	       crawlHasFinished = false;
+	      add(choice);
+	      crawlHasFinished = false;
+	      showTeamStatsClicked = false;
 	   }
+	   
    }
    
    private void beginCrawl() {
@@ -86,14 +104,31 @@ public class MainScreen extends Applet implements ActionListener  {
 
    }
    
+   /**
+    * This method loads the teams from the file locally stored
+    * on the computer
+    */
+   private void loadTeams() {
+	   FileManager fm = new FileManager();
+	   this.teams = fm.openFile();
+   }
+   
    public void actionPerformed(ActionEvent evt)    { 
 // Here we will ask what component called this method 
-        if (evt.getSource() == downloadButton)  {
+       
+	   //Download Teams from Internet
+	   if (evt.getSource() == downloadButton)  {
         	crawlIsInProgress = true;
         	beginCrawl();
         	crawlIsInProgress = false;
         	crawlHasFinished = true;
             repaint();
+        }
+        //Load Teams from File Locally
+        if (evt.getSource() == showTeamStats) {
+        	loadTeams();
+        	showTeamStatsClicked = true;
+        	repaint();
         }
                 
    }

@@ -1,6 +1,8 @@
 package WorldCurlingTourCrawler;
 
-public class Game {
+import java.io.Serializable;
+
+public class Game implements Serializable{
 
 private Team homeTeam;
 private Team awayTeam;

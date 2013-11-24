@@ -1,7 +1,10 @@
 package WorldCurlingTourCrawler;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Statistics {
 
@@ -25,11 +28,33 @@ public class Statistics {
 		addTeamStatistics();
 		addHammerStats();
 		//Sort the teams
-		TeamSorter ts = new TeamSorter(teams);
-		teams = ts.sortTeamsByName();
+		sortTeams();		
+		writeToFile();
 		return teams;
 	}
 	//
+	
+	private void sortTeams() {
+		TeamSorter ts = new TeamSorter(teams);
+		teams = ts.sortTeamsByName();
+	}
+	
+	private void writeToFile() {
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream("teams.tmp");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(teams);
+			oos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	private void createListOfTeams() {
 		Team h;

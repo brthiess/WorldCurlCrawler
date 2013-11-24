@@ -1,8 +1,9 @@
 package WorldCurlingTourCrawler;
 //
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TeamStatistics {
+public class TeamStatistics implements Serializable{
 
 	Team t;
 	ArrayList<Game> games; //Games for the one team 't'
