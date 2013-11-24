@@ -17,6 +17,7 @@ this.sort = new Sorter();
 
 public ArrayList<Game> Retrieve(String url) {
 this.url = url;
+
 ArrayList<Game> data = new ArrayList<Game>();
 try {
             URL my_url = new URL(url);

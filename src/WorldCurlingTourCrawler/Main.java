@@ -5,15 +5,16 @@ import java.util.ArrayList;
 
 public class Main {
 
+	
 public static void main(String[] args) {
 ArrayList<Game> games;
 Retriever r = new Retriever();
 Navigator n = new Navigator();
 BufferedReader br;
 int j = 0;
-String url = "http://www.worldcurl.com/schedule.php?eventtypeid=21&eventyear=2013";
+String url = "http://www.worldcurl.com/schedule.php?eventtypeid=21";
 
-while (j<5) {
+while (j<100) {
 br = r.getPageSource(url);
 r.Retrieve(url);
 url = n.nextURL(br);
@@ -30,11 +31,11 @@ System.out.println(teams.get(i).getNameString() + "\tW:" + teams.get(i).getWins(
 }
 
 
-/*for (int i = 0; i < games.size(); i++) {
+for (int i = 0; i < games.size(); i++) {
 System.out.println(games.get(i).getHomeTeamString() + "\t" + games.get(i).getHomeScoreString());
 System.out.println(games.get(i).getAwayTeamString() + "\t" + games.get(i).getAwayScoreString());
 System.out.println();
-}*/
+}
 }
 
 //
